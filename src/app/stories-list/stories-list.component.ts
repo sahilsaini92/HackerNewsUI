@@ -12,8 +12,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 })
 export class StoriesListComponent implements OnInit {
   hackerNewsStoryList: Story[]=[];
-  pageSize = 10;
+  pageSize = 3;
   pageIndex = 0;
+  display: string = 'block'; 
 
   hidePageSize = true;
   showFirstLastButtons = true;
@@ -39,8 +40,17 @@ export class StoriesListComponent implements OnInit {
   }
 
   search(event: KeyboardEvent) {
+    this.showloader();
     this.getStories((event.target as HTMLTextAreaElement).value);
   }
+
+  hideloader() { 
+  this.display = 'none';
+   } 
+
+   showloader() { 
+    this.display = 'block';
+     } 
   
   getStories(searchTerm: string) {
     var pageIndex = this.pageIndex;
@@ -48,6 +58,9 @@ export class StoriesListComponent implements OnInit {
     pageIndex = pageIndex+1;
     this.storyService.getTopStories(searchTerm,pageIndex, pageSize).subscribe(
         (result:any) => {
+          if (result.stories) { 
+            this.hideloader(); 
+        } 
           this.hackerNewsStoryList = result.stories;
           this.totalCount=result.totalCount;
         },
