@@ -26,7 +26,7 @@ describe('MyService', () => {
     const pageNumber = 1;
     const pageSize = 10;
 
-    const expectedUrl = `https://localhost:7095/api/Stories/NewStories?pageNumber=${pageNumber}&pageSize=${pageSize}&searchString=${searchText}`;
+    const expectedUrl = `https://rsystemshackernewsapi.azurewebsites.net/api/Stories/NewStories?pageNumber=${pageNumber}&pageSize=${pageSize}&searchString=${searchText}`;
 
     const mockResponse = {
       stories: [
